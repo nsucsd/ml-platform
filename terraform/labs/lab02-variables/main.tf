@@ -9,6 +9,11 @@ terraform {
       version = "~> 5.0"
     }
   }
+
+  backend "gcs" {
+    bucket = "ml-platform-dev-498404-terraform-state"
+    prefix = "labs/lab02"
+  }
 }
 
 provider "google" {
