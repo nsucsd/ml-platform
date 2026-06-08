@@ -10,12 +10,10 @@ terraform {
     }
   }
 
-  # PART 2 — we add the backend block here after creating the bucket
-  # Leave this commented out for now
-  # backend "gcs" {
-  #   bucket = "ml-platform-dev-498404-terraform-state"
-  #   prefix = "labs/lab03"
-  # }
+  backend "gcs" {
+    bucket = "ml-platform-dev-498404-terraform-state"
+    prefix = "labs/lab03"
+  }
 }
 
 provider "google" {
