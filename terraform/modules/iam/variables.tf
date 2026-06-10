@@ -20,3 +20,11 @@ variable "labels" {
   type        = map(string)
   default     = {}
 }
+
+# ADD to terraform/modules/iam/variables.tf
+
+variable "kubernetes_namespace" {
+  description = "Kubernetes namespace where the service account lives"
+  type        = string
+  default     = "ml-platform"
+}
