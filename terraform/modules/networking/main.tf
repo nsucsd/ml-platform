@@ -20,7 +20,7 @@ resource "google_compute_network" "vpc" {
   auto_create_subnetworks = false
   # ↑ false = we control subnets manually
   #   true  = GCP auto-creates one subnet per region (not what we want)
-  project                 = var.project_id
+  project = var.project_id
 }
 
 # ── SUBNET ────────────────────────────────────────────────────
@@ -63,11 +63,11 @@ resource "google_compute_router" "router" {
 # ── CLOUD NAT ─────────────────────────────────────────────────
 
 resource "google_compute_router_nat" "nat" {
-  name                               = "${var.network_name}-nat"
-  router                             = google_compute_router.router.name
-  region                             = var.region
-  project                            = var.project_id
-  nat_ip_allocate_option             = "AUTO_ONLY"
+  name                   = "${var.network_name}-nat"
+  router                 = google_compute_router.router.name
+  region                 = var.region
+  project                = var.project_id
+  nat_ip_allocate_option = "AUTO_ONLY"
   # ↑ GCP automatically assigns public IPs for NAT
   #   alternative is MANUAL_ONLY where you specify IPs
 

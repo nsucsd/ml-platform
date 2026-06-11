@@ -25,12 +25,12 @@ variable "environment" {
 variable "bucket_config" {
   description = "Configuration for GCS buckets"
   type = object({
-    versioning_enabled  = bool
-    force_destroy       = bool
+    versioning_enabled = bool
+    force_destroy      = bool
   })
   default = {
-    versioning_enabled  = true
-    force_destroy       = true
+    versioning_enabled = true
+    force_destroy      = true
   }
 }
 

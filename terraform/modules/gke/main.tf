@@ -40,7 +40,7 @@ resource "google_container_cluster" "primary" {
     # enable_private_nodes    = true  → nodes have no public IPs
     # enable_private_endpoint = false → control plane still reachable
     #                                   from internet (needed for kubectl)
-    master_ipv4_cidr_block  = "172.16.0.0/28"
+    master_ipv4_cidr_block = "172.16.0.0/28"
     # Separate range for the control plane
     # Must not overlap with any other range
     # /28 = 16 IPs, plenty for control plane
@@ -106,7 +106,7 @@ resource "google_container_node_pool" "primary_nodes" {
 
   # Auto-repair and auto-upgrade keep nodes healthy
   management {
-    auto_repair  = true
+    auto_repair = true
     # GKE automatically replaces unhealthy nodes
     auto_upgrade = true
     # GKE automatically upgrades node Kubernetes version
