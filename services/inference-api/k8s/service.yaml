@@ -1,0 +1,17 @@
+# services/inference-api/k8s/service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: inference-api
+  namespace: ml-platform
+  labels:
+    app: inference-api
+spec:
+  selector:
+    app: inference-api
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+  type: ClusterIP

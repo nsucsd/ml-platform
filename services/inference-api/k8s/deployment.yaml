@@ -1,0 +1,56 @@
+# services/inference-api/k8s/deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inference-api
+  namespace: ml-platform
+  labels:
+    app: inference-api
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inference-api
+  template:
+    metadata:
+      labels:
+        app: inference-api
+        version: v1
+    spec:
+      serviceAccountName: ml-inference-ksa
+      # ↑ uses the Workload Identity SA from Lab 8
+      #   gives the pod GCP access without key files
+
+      containers:
+      - name: inference-api
+        image: us-central1-docker.pkg.dev/ml-platform-dev-498404/ml-platform/inference-api:v1
+        ports:
+        - containerPort: 8080
+
+        env:
+        - name: ENVIRONMENT
+          value: "dev"
+
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 30
+
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
