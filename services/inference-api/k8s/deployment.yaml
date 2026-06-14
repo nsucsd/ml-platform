@@ -25,13 +25,15 @@ spec:
 
       containers:
       - name: inference-api
-        image: us-central1-docker.pkg.dev/ml-platform-dev-498404/ml-platform/inference-api:v1
+        image: us-central1-docker.pkg.dev/ml-platform-dev-498404/ml-platform/inference-api:v2
         ports:
         - containerPort: 8080
 
         env:
         - name: ENVIRONMENT
           value: "dev"
+        - name: OTEL_EXPORTER_OTLP_ENDPOINT
+          value: "http://otel-collector.monitoring:4317"
 
         resources:
           requests:
